@@ -1,0 +1,188 @@
+/*Names the logo animation and gives it a duration of 5s*/
+#logo{
+    animation-duration: 5s;
+    animation-name: grow;
+}
+
+/*Tells the grow animation from above to grow from 25px to 475px and to change from 0 to 1 opacity*/
+@keyframes grow{
+    from{
+        width: 25px;
+        opacity: 0;
+    }
+    to{
+        width: 475px;
+        opacity: 1;
+    }
+}
+
+/*The body element is styled with the Poppins font (using Google fonts) with serif as a backup.  The image “concrete_seamless.png” is set as the background-image with a backup color of #f1f1f1. */
+body{
+    font-family: "Poppins", serif;
+    background-image: url("../images/concrete_seamless.png"); background-color: #f1f1f1;
+}
+
+/* Header is set to flex and displayed as a column, it is centered vertically*/
+header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Nav links are set to flex and displayed as a columnn*/
+.nav_links{
+    display: flex;
+    flex-direction: column;
+}
+
+/* Prevent codes from changing color after they are clicked. Default browser link color is blue so all visited links will now remain blue post "click"*/
+a:link, a:visited{
+    color: blue;
+}
+
+/* Style header elements that are direct children of a card class to have a  background color, #288088, and solid 2px border using #45ADAD. These elements have 20px of padding on the top and the bottom, and 50px border-radius on the top left and right corners creating a rounded corner effect.  */
+.card > header{
+    background: #288088;
+    border: solid 2px #45ADAD;
+    padding: 20px 0px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+/*Sets the entire card to have 50px border-radius on the top left and right corners creating a rounded corner effect.*/
+.card{
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
+/*Card initial width is set to 450px using flex properties and it will not shrink or grow.*/
+.card{
+    width: 450px;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+/* The pricing class are changed to display as a flex, non-wrapping, column that is centered horizontally and vertically. */
+.pricing{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Images in the gallery class have a solid 10px border with a color of #50C7C7, 10px margin on all four sides and a width of 300px. */
+.gallery img{
+    border: solid 10px #50C7C7;
+    margin: 10px;
+    width: 300px;
+}
+
+/*Gallery is set to flex and all items within will wrap to fit the screen. These items are centered horizontally.*/
+.gallery{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/*The following media query will change the header,nav, pricing class and card styling when the screen is at least 900px */
+@media screen and (min-width: 900px){
+
+    /*Makes the header elements a flex display that spaces the logo at the far left end and the links at the far right ends of the header. These elements are listed in a row*/
+    header{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    /*The links within the header are set to flex display and then aligned in a row.*/
+    .nav_links{
+        display: flex;
+        flex-direction: row;
+    }
+
+     /* The size of the card's width is set to be 275px */
+    .card{
+        flex-basis: 275px;
+    }
+
+    /* The pricing class are changed to display as a flex, non-wrapping, row that is centered horizontally and vertically. */
+    .pricing{
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    /*This rule set fixes the header at the top of the page even when the main content is scrolled through. The z-index ensures that the header overlays all page content.*/
+    header{
+        position: fixed;
+        width: 100%;
+        z-index: 2;
+    }
+    /*This places padding on top of the main content to avoid it being covered by the header above.*/
+    main{
+        padding-top: 100px;
+    }
+    /*This removes the fixed position for all headers within main. The z index ensures that all header content lies below the header above.*/
+    main header{
+        position: relative;
+        z-index: 1;
+    }
+}
+
+/*The following media query will remove the animation of the logo when a user prefers reduced motion enabled*/
+@media (prefers-reduced-motion) {
+    #logo{
+        animation: none;
+    }
+}
+
+/*The following media query changes the styling of the site when printed*/
+@media print{
+
+    /*Styles the body font as Arial with a default of Helvetica and removes the background image*/
+    body{
+        font-family: Arial, Helvetica;
+        background-image: none;
+        background-color: #f1f1f1;
+    }
+
+    /*Makes the headers flex boxes that are arranged as a column*/
+    header{
+        display: flex;
+        flex-direction: column;
+    }
+    /*Makes the nav links a flex box that appear as a row with space in between at the full width.*/
+    .nav_links {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100vw;
+
+    }
+
+    /*Makes the pricing cards flex boxes that are aligned in a row with no wrap. The flex-end ensures that all the boxes are leveled on the bottom and the justify content centers the items horizontally.*/
+    .pricing{
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-end;
+    }
+
+    /*This gives the cards a solid 2px border with #45ADDD color. The flex-basis is set to 325px and the flex-shrink is set to 1 to allow each card to shrink equally in order to fit on the page.*/
+    .card{
+        border: solid 2px #45ADDD;
+        flex-basis: 325px;
+        flex-shrink: 1;
+    }
+
+    /*This ensures that none of the gallery is visible when the webpage is printed*/
+    .gallery{
+        display: none;
+    }
+
+    /*This adds the thumbs up emoji at the end of the second list item with each main list*/
+    main li:nth-child(2):after{
+        content: '👍';
+    }
+}
